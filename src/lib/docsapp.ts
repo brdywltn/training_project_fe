@@ -1,7 +1,7 @@
 import * as model from "./docsapp-model";
 import axios, {AxiosRequestConfig} from "axios";
 
-let baseUrl = process.env.TARGET_URL || "http://localhost/companies";
+let baseUrl = process.env.TARGET_URL || "http://localhost/";
 
 let config: AxiosRequestConfig<model.Company> = {
     baseURL: baseUrl
