@@ -1,0 +1,83 @@
+{% extends 'layout.njk' %}
+
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+
+
+
+{% block content %}
+    <p class="govuk-body">
+        We gon' register some companies
+    </p>
+
+    <form action="/register" method="post">
+        {% from "govuk/components/button/macro.njk" import govukButton %}
+        {% from "govuk/components/input/macro.njk" import govukInput %}
+        {% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+        {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+        {% call govukFieldset({
+          legend: {
+            text: "What is your address?",
+            classes: "govuk-fieldset__legend--l",
+            isPageHeading: true
+          }
+        }) %}
+
+          {{ govukInput({
+            label: {
+              text: "Company Name"
+            },
+            id: "companyName",
+            name: "companyName",
+            autocomplete: "companyName"
+          }) }}
+
+          {{ govukInput({
+             label: {
+               text: "Company Address"
+             },
+             id: "companyAddress",
+             name: "companyAddress",
+             autocomplete: "companyAddress"
+            }) }}
+
+          {{ govukRadios({
+              name: "companyType",
+              fieldset: {
+                legend: {
+                  text: "What type is your company?",
+                  isPageHeading: false,
+                  classes: "govuk-fieldset__legend--l"
+                }
+              },
+              items: [
+                {
+                  value: "LTD",
+                  text: "Limited Company",
+                  id: "ltdRadio"
+                },
+                {
+                  value: "LLP",
+                  text: "Limited Liability Partnership",
+                  id: "llpRadio"
+                },
+                {
+                  value: "FXC",
+                  text: "Foreign Company",
+                  id: "fxcRadio"
+                },
+                {
+                  value: "NPO",
+                  name: "companyType",
+                  text: "Non-Profit Organisation"
+                }
+              ]
+            }) }}
+
+
+        {% endcall %}
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+    </form>
+{% endblock %}

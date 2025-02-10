@@ -1,0 +1,21 @@
+import express from "express";
+import * as process from "node:process";
+import { getCompanies, getCompany, patchCompany, createCompany, editCompany, strikeoffCompany } from "./lib/docsapp";
+
+const appOld = express();
+const port = Number.parseInt(process.env.port || "3000");
+const host = process.env.HOST || '0.0.0.0';
+
+appOld.get("/", (req, res) => {
+    res.send("Hello World!");
+});
+
+appOld.get("/companies", async (req, res) => {
+    let companies = await getCompanies();
+    res.send(companies);
+})
+
+appOld.listen(port, host, () => {
+    console.log(`Application is running on http://${host}:${port} `);
+});
+
