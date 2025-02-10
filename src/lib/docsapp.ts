@@ -1,9 +1,12 @@
 import * as model from "./docsapp-model";
 import axios, {AxiosRequestConfig} from "axios";
 
-let config: AxiosRequestConfig<model.Company[]> = {
-    baseURL: "http://localhost:80"
+let baseUrl = process.env.TARGET_URL || "http://localhost/companies";
+
+let config: AxiosRequestConfig<model.Company> = {
+    baseURL: baseUrl
 }
+
 
 export function getCompanies(): Promise<model.Company[]> {
     return axios.get<model.Company[]>("/companies", config)
